@@ -1,6 +1,6 @@
 import cv2
 import threading
-
+from controller.utils.opencvtest import *
 
 class RecordingThread(threading.Thread):
     def __init__(self, name, camera):
@@ -44,7 +44,8 @@ class VideoCamera(object):
         self.cap.release()
 
     def get_frame(self):
-        ret, frame = self.cap.read()
+        ret, image = self.cap.read()
+        frame = OpencvTest3(image)
 
         if ret:
             ret, jpeg = cv2.imencode('.jpg', frame)
